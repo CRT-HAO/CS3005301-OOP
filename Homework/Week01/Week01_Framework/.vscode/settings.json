@@ -20,5 +20,12 @@
       },
       "Description": ""
     }
+  },
+  "files.associations": {
+    "*.jsrender": "html",
+    "ctime": "cpp",
+    "thread": "cpp",
+    "iostream": "cpp",
+    "ostream": "cpp"
   }
 }
