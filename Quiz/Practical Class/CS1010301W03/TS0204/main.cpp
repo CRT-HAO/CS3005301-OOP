@@ -30,7 +30,7 @@ string getStringWithSpaces(string str, size_t width = 0)
 
 int main()
 {
-	// Get n from istream, break if get a EOF 
+	// Get n from istream, break if get a EOF
 	for (unsigned int n; (cin >> n) && !cin.eof();)
 	{
 		vector<Data> elems;
