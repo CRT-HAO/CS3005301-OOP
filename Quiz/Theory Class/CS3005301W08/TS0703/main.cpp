@@ -1,4 +1,4 @@
-// Name: ±iµq¶v (B11030202@mail.ntust.edu.tw)
+ï»¿// Name: å¼µçš“éˆž (B11030202@mail.ntust.edu.tw)
 // Date: April 11, 2023
 // Last Update: April 11, 2023
 // Problem statement: Seven-segment Display
@@ -64,7 +64,7 @@ vector<string> getMergedSevenSegment(vector<char> cc)
 
 int main()
 {
-	for (string str; (cin >> str) && !cin.eof();)
+	for (string str; getline(cin, str) && !cin.eof();)
 	{
 		vector<char> chars;
 		size_t cNum = 0;
