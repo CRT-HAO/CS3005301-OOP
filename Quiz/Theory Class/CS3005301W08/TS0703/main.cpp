@@ -29,6 +29,9 @@ map <char, vector<char>> seven = {
 	{ '9', vector<char>({ '_', '|', '|', '_', ' ', '|', '_' }) }
 };
 
+// Indent: Char to seven-segment pattern
+// Pre: The variable c is input char
+// Post: The function returns seven-segment pattern in string vector
 vector<string> getSevgenSegment(char c)
 {
 	vector<string> r(3);
@@ -49,6 +52,10 @@ vector<string> getSevgenSegment(char c)
 	return r;
 }
 
+// Indent: Merge multi chars to seven-segment patterns
+// Pre: The variable cc is the target chars in vector of char
+// Post: The function returns the merged seven-segment patterns
+//       in vector of string
 vector<string> getMergedSevenSegment(vector<char> cc)
 {
 	vector<string> r(3);
@@ -72,6 +79,7 @@ int main()
 			chars.push_back(c);
 
 		vector<string> sevenMerged = getMergedSevenSegment(chars);
+
 		cout 
 			<< sevenMerged[0] << endl
 			<< sevenMerged[1] << endl
