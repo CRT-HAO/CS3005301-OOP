@@ -14,19 +14,11 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="words.txt" />
-    <None Include="7.1-Form_Word.docx" />
+    <None Include="midterm_Large Integer Operation.pdf" />
+    <None Include="midterm_Large Integer Operation.docx" />
     <None Include="hbk.json" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Form.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-  </ItemGroup>
+  <ItemGroup />
 </Project>
