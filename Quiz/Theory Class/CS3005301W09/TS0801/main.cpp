@@ -1,3 +1,8 @@
+// Name: ±iµq¶v (B11030202@mail.ntust.edu.tw)
+// Date: April 24, 2023
+// Last Update: April 24, 2023
+// Problem statement: Design Polynomial Class
+
 #include <iostream>
 #include <string>
 
