@@ -1,4 +1,5 @@
 #include "PrimeNumber.h"
+
 #include <iostream>
 
 using namespace std;
@@ -12,6 +13,5 @@ int main()
 	cout << p1.get() << endl;
 	cout << b.get() << endl;
 	cout << p2.get() << endl;
-	system("pause");
 	return 0;
 }
