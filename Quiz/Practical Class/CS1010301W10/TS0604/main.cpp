@@ -1,5 +1,12 @@
-#include<iostream>
+// Name: ±iµq¶v (B11030202@mail.ntust.edu.tw)
+// Date: May 2, 2023
+// Last Update: May 2, 2023
+// Problem statement: N Dim Vector
+
 #include "VecNf.h"
+
+#include<iostream>
+
 using namespace std;
 
 int main() {
@@ -30,7 +37,6 @@ int main() {
 
 	cout << A * C << endl; // Inconsistent
 
-	system("pause");
 	return 0;
 
 }

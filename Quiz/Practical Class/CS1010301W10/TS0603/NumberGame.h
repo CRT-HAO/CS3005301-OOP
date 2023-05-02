@@ -14,59 +14,55 @@
 class NumberGame
 {
 private:
-	std::string inputNumber;
-	std::string fileName;
-	std::set<int> allCombination;
-	std::vector<int> validNumber;
+	std::string _inputNumber;
+	std::string _fileName;
+	std::set<int> _allCombination;
+	std::vector<int> _validNumber;
 
 public:
 	NumberGame() { }
 
 	inline void SetInput(int input)
-	{ inputNumber = std::to_string(input); }
+	{ this->_inputNumber = std::to_string(input); }
 
 	void ProcessInput()
 	{
-		for (const auto& c : inputNumber)
+		for (const char& c : this->_inputNumber)
 		{
-			// Change data type
 			int digit = (int)(c - '0');
-			// Create a temp set
 			std::set<int> temp;
-			// Multiply current digit with every element in validNumber
-			for (const auto& i : allCombination)
+			for (const int& i : this->_allCombination)
 				temp.insert(i * digit);
-			// Insert digit
-			allCombination.insert(digit);
-			// Insert all combination of current digit
-			allCombination.insert(temp.begin(), temp.end());
+
+			this->_allCombination.insert(digit);
+			this->_allCombination.insert(temp.begin(), temp.end());
 		}
 	}
 
 	inline void SetFileName(std::string input)
-	{ fileName = input; }
+	{ this->_fileName = input; }
 
 	void LoadNumberList()
 	{
-		std::ifstream fin(fileName);
+		std::ifstream fin(this->_fileName);
 		for (int input; fin >> input;)
-			if (allCombination.count(input))
-				validNumber.push_back(input);
+			if (this->_allCombination.count(input))
+				this->_validNumber.push_back(input);
 
 		fin.close();
 	}
 
 	inline void PrintAllValid() const
 	{
-		for (const auto& number : validNumber)
+		for (const int& number : this->_validNumber)
 			std::cout << number << std::endl;
 	}
 
 	inline void Reset()
 	{
-		inputNumber.clear();
-		fileName.clear();
-		validNumber.clear();
-		allCombination.clear();
+		this->_inputNumber.clear();
+		this->_fileName.clear();
+		this->_validNumber.clear();
+		this->_allCombination.clear();
 	}
 };

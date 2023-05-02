@@ -1,3 +1,8 @@
+// Name: ±iµq¶v (B11030202@mail.ntust.edu.tw)
+// Date: May 3, 2023
+// Last Update: May 3, 2023
+// Problem statement: Observation Diary
+
 #include "Diary.h"
 #include "Creature.h"
 
