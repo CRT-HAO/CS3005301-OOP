@@ -435,3 +435,6 @@ build/
 
 # macOS
 .DS_Store
+
+# VSCode
+.vscode
