@@ -1,3 +1,8 @@
+// Name: 張皓鈞 (B11030202@mail.ntust.edu.tw)
+// Date: June 10, 2023
+// Last Update: June 10, 2023
+// Problem statement: Library Database
+
 #include "LibraryManager.hpp"
 
 #include <algorithm>
@@ -22,8 +27,12 @@ using namespace std;
 string parseArg(istringstream &iss)
 {
     string arg;
-    char first;
-    if ( iss >> first && first == '"' )
+    char first = 0;
+
+    if ( iss.eof() )
+        return arg;
+
+    if ( (iss >> first) && first == '"' )
     {
         getline(iss, arg, '"');
     }
@@ -51,7 +60,8 @@ int main()
             string name = parseArg(iss);
             string author = parseArg(iss);
             string edition = parseArg(iss);
-            if ( name.empty() || author.empty() || edition.empty() )
+            if ( name.length() <= 0 || author.length() <= 0 ||
+                 edition.length() <= 0 )
             {
                 cout << "Incomplete Command." << endl;
                 continue;
@@ -74,7 +84,8 @@ int main()
                 string name = parseArg(iss);
                 string author = parseArg(iss);
                 string edition = parseArg(iss);
-                if ( name.empty() || author.empty() || edition.empty() )
+                if ( name.length() <= 0 || author.length() <= 0 ||
+                     edition.length() <= 0 )
                 {
                     cout << "Incomplete Command." << endl;
                     continue;
@@ -93,7 +104,7 @@ int main()
             {
                 string name = parseArg(iss);
                 string author = parseArg(iss);
-                if ( name.empty() || author.empty() )
+                if ( name.length() <= 0 || author.length() <= 0 )
                 {
                     cout << "Incomplete Command." << endl;
                     continue;
@@ -120,7 +131,7 @@ int main()
             {
                 string name = parseArg(iss);
                 string author = parseArg(iss);
-                if ( name.empty() || author.empty() )
+                if ( name.length() <= 0 || author.length() <= 0 )
                 {
                     cout << "Incomplete Command." << endl;
                     continue;
@@ -133,13 +144,15 @@ int main()
                     cout << "Title: " << book->getName() << "\t"
                          << "Author: " << book->getAuthor()->getName() << "\t"
                          << "Edition: ";
+                    size_t i = 0, n = book->getEditions().size();
                     for ( const int &e : book->getEditions() )
                     {
                         cout << e;
-                        if ( e != *book->getEditions().end() )
+                        if ( i != n - 1 )
                             cout << ", ";
+                        ++i;
                     }
-                    cout << "." << endl;
+                    cout << endl;
                 }
                 else
                     cout << "Book doesn't exist." << endl;
@@ -147,7 +160,7 @@ int main()
             else if ( subAction == "Author" )
             {
                 string author = parseArg(iss);
-                if ( author.empty() )
+                if ( author.length() <= 0 )
                 {
                     cout << "Incomplete Command." << endl;
                     continue;
@@ -160,13 +173,23 @@ int main()
                     if ( !a->noBook() )
                     {
                         cout << a->getName() << "'s Books: ";
-                        for ( const auto &book : a->getBooks() )
+
+                        vector<Book *> books(a->getBooks().begin(),
+                                             a->getBooks().end());
+
+                        sort(books.begin(), books.end(),
+                             [](Book *a, Book *b) -> bool
+                             { return a->getName() < b->getName(); });
+
+                        size_t i = 0, n = books.size();
+                        for ( const auto &book : books )
                         {
                             cout << book->getName();
-                            if ( book != *a->getBooks().end() )
+                            if ( i != n - 1 )
                                 cout << ", ";
+                            ++i;
                         }
-                        cout << "." << endl;
+                        cout << endl;
                     }
                     else
                         cout << "No book found." << endl;
@@ -182,23 +205,74 @@ int main()
         }
         else if ( action == "Sort" )
         {
-            string by;
-            iss >> by;
-            string sortBy = parseArg(iss);
-            if ( sortBy.empty() )
-            {
-                cout << "Incomplete Command." << endl;
-                continue;
-            }
-            if ( sortBy == "title" )
+            string by, sortBy;
+            iss >> by >> sortBy;
+            if ( sortBy == "Title" )
             {
                 vector<Book *> books = library.getBooks();
 
                 sort(books.begin(), books.end(),
-                     [](Book *a, Book *b) -> bool {return a->getName()[0] > b->getName()[0];});
+                     [](Book *a, Book *b) -> bool
+                     {
+                         if ( a->getName()[0] == b->getName()[0] )
+                         {
+                             return a->getAuthor()->getName()[0] <
+                                    b->getAuthor()->getName()[0];
+                         }
+                         else
+                             return a->getName()[0] < b->getName()[0];
+                     });
+
+                for ( const auto &book : books )
+                {
+                    cout << "Title: " << book->getName() << "\t"
+                         << "Author: " << book->getAuthor()->getName() << "\t"
+                         << "Edition: ";
+
+                    size_t i = 0, n = book->getEditions().size();
+                    for ( const int &e : book->getEditions() )
+                    {
+                        cout << e;
+                        if ( i != n - 1 )
+                            cout << ", ";
+                        ++i;
+                    }
+                    cout << endl;
+                }
             }
-            else if ( sortBy == "author" )
+            else if ( sortBy == "Author" )
             {
+                vector<Book *> books = library.getBooks();
+
+                sort(books.begin(), books.end(),
+                     [](Book *a, Book *b) -> bool
+                     {
+                         if ( a->getAuthor()->getName()[0] ==
+                              b->getAuthor()->getName()[0] )
+                         {
+                             return a->getName()[0] < b->getName()[0];
+                         }
+                         else
+                             return a->getAuthor()->getName()[0] <
+                                    b->getAuthor()->getName()[0];
+                     });
+
+                for ( const auto &book : books )
+                {
+                    cout << "Title: " << book->getName() << "\t"
+                         << "Author: " << book->getAuthor()->getName() << "\t"
+                         << "Edition: ";
+
+                    size_t i = 0, n = book->getEditions().size();
+                    for ( const int &e : book->getEditions() )
+                    {
+                        cout << e;
+                        if ( i != n - 1 )
+                            cout << ", ";
+                        ++i;
+                    }
+                    cout << endl;
+                }
             }
             else
             {

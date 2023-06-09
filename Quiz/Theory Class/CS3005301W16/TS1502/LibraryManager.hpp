@@ -22,7 +22,7 @@ public:
         // If the author not found, create a new one
         if ( a == nullptr )
         {
-            a = new Author(name);
+            a = new Author(author);
             this->authors.insert(a);
         }
 
